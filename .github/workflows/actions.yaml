@@ -1,4 +1,4 @@
-ame: Build and pusch Docker Container
+name: Build and pusch Docker Container
 
 on:
   push:
