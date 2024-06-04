@@ -18,7 +18,7 @@ public class DaprUtil {
     private String KVSTORE_NAME;
     @ConfigProperty(name = "dapr.http-endpoint")
     private String DAPR_HTTP_ENDPOINT;
-    @ConfigProperty(name = "dapr.api-token")
+    @ConfigProperty(name = "dapr.api-token.inbound")
     private String DAPR_API_TOKEN;
     @ConfigProperty(name = "dapr.target-appid")
     private String INVOKE_TARGET_APPID;
