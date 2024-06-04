@@ -3,6 +3,7 @@ package io.arrogantprogrammer;
 import io.dapr.client.DaprClient;
 import io.dapr.client.DaprClientBuilder;
 import io.quarkus.logging.Log;
+import io.smallrye.mutiny.Uni;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.ApplicationScoped;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
@@ -33,8 +34,9 @@ public class DaprUtil {
         Log.debugf("INVOKE_TARGET_APPID: %s", INVOKE_TARGET_APPID);
     }
 
-    void publishEvent(String helloString, String string) {
+    Uni<Void> publishEvent(String helloString, String string) {
         daprClient.publishEvent(PUBSUB_NAME, helloString, string).block();
         Log.debugf("Published event to %s: %s", PUBSUB_NAME, helloString);
+        return null;
     }
 }
