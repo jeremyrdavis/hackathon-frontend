@@ -34,7 +34,7 @@ public class DaprUtil {
     }
 
     void publishEvent(String helloString, String string) {
-        daprClient.publishEvent(PUBSUB_NAME, helloString, string);
+        daprClient.publishEvent(PUBSUB_NAME, helloString, string).block();
         Log.debugf("Published event to %s: %s", PUBSUB_NAME, helloString);
     }
 }
