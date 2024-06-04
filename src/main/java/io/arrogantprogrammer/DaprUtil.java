@@ -35,7 +35,7 @@ public class DaprUtil {
     }
 
     Uni<Void> publishEvent(String helloString, String string) {
-        daprClient.publishEvent(PUBSUB_NAME, helloString, string).block();
+        daprClient.publishEvent(PUBSUB_NAME, "orders", helloString).block();
         Log.debugf("Published event to %s: %s", PUBSUB_NAME, helloString);
         return null;
     }
