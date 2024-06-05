@@ -5,7 +5,10 @@ import java.util.HashMap;
 
 import com.google.j2objc.annotations.Property;
 import io.dapr.client.DaprClient;
+import io.dapr.client.domain.CloudEvent;
+import io.dapr.v1.DaprProtos;
 import io.quarkus.logging.Log;
+import io.smallrye.mutiny.Uni;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
@@ -52,5 +55,16 @@ public class GreetingResource {
         } else {
             return Response.noContent().build();
         }
+    }
+
+    @POST
+    @Path("/pubsub/neworders")
+    public Uni<Response> onGreeting(CloudEvent<String> cloudEvent){
+        Log.debugf("Received event with data: %s", cloudEvent.getData());
+        return Uni.createFrom().item(cloudEvent.getData()).onItem().transform(data -> {
+            Integer key = greetings.size() + 1;
+            greetings.put(key, data);
+            return Response.ok().build();
+        });
     }
 }
